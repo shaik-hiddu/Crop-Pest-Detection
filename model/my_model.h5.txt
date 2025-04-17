@@ -1,0 +1,80 @@
+# ====== Step 1: Import Libraries ======
+import os
+import tensorflow as tf
+from tensorflow.keras.preprocessing import image_dataset_from_directory
+from tensorflow.keras.applications import EfficientNetB4
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Dense, Dropout, GlobalAveragePooling2D
+from tensorflow.keras.optimizers import Adam
+
+# ====== Step 2: Mount Google Drive ======
+from google.colab import drive
+drive.mount('/content/drive')
+
+# ====== Step 3: Define Dataset Path ======
+train_dir = "/content/drive/My Drive/pest/train"
+test_dir = "/content/drive/My Drive/pest/test"
+
+# ====== Step 4: Load Dataset with Augmentation ======
+batch_size = 32
+img_size = (380, 380)
+
+train_dataset = image_dataset_from_directory(
+    train_dir,
+    shuffle=True,
+    image_size=img_size,
+    batch_size=batch_size
+)
+
+test_dataset = image_dataset_from_directory(
+    test_dir,
+    shuffle=False,
+    image_size=img_size,
+    batch_size=batch_size
+)
+
+# ✅ Get number of classes
+num_classes = len(train_dataset.class_names)
+print("Number of classes:", num_classes)
+
+# ====== Step 5: Normalize Data ======
+preprocess_input = tf.keras.applications.efficientnet.preprocess_input
+
+train_dataset = train_dataset.map(lambda x, y: (preprocess_input(x), y))
+test_dataset = test_dataset.map(lambda x, y: (preprocess_input(x), y))
+
+# ====== Step 6: Define EfficientNetB4 Model ======
+base_model = EfficientNetB4(weights="imagenet", include_top=False, input_shape=(380, 380, 3))
+base_model.trainable = False  # Keep frozen for first training
+
+# Custom Layers
+x = base_model.output
+x = GlobalAveragePooling2D()(x)
+x = Dropout(0.4)(x)
+x = Dense(512, activation="relu")(x)  # Increased neurons
+x = Dropout(0.3)(x)
+output = Dense(num_classes, activation="softmax")(x)
+
+model = Model(inputs=base_model.input, outputs=output)
+
+# ✅ Compile the Model (Fixed Loss Function)
+model.compile(
+    optimizer=Adam(learning_rate=0.0005),
+    loss="sparse_categorical_crossentropy",  # ✅ FIXED: Correct loss function for integer labels
+    metrics=["accuracy"]
+)
+
+
+# ====== Step 8: Unfreeze & Fine-tune the Model ======
+base_model.trainable = True  # Unfreeze EfficientNet for fine-tuning
+
+# Lower learning rate for fine-tuning
+model.compile(optimizer=Adam(learning_rate=0.00001), loss="sparse_categorical_crossentropy", metrics=["accuracy"])
+
+print("Fine-tuning model...")
+
+history_finetune = model.fit(train_dataset, validation_data=test_dataset, epochs=10)
+
+# ====== Step 9: Save the Model ======
+model.save("/content/drive/My Drive/final_model.h5")
+print("✅ Model saved successfully!")
