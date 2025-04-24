@@ -6,11 +6,13 @@ from PIL import Image
 import json
 import os
 from huggingface_hub import hf_hub_download
+import urllib.request # Import for handling URLs
 
 # ========== Constants ==========
 USER_FILE = "users.json"
-MODEL_PATH = "final_model.h5"  # Replace with actual path if loading locally
+MODEL_PATH = "final_model.h5"
 IMG_SIZE = (380, 380)
+# PESTICIDE_IMAGE_DIR = "assets/pesticide_images" # No need to define, we handle dynamically
 
 # ========== Authentication ==========
 def load_users():
@@ -42,16 +44,19 @@ def load_pest_model():
 model = load_pest_model()
 
 # ========== Class Labels ==========
+# Modified to use URLs instead of local file paths.  This is CRUCIAL
+# because the original code assumes the 'assets/pesticide_images' directory
+# exists locally, which might not be the case when running in a cloud environment.
 class_labels = {
-    0: {'pest': 'aphid', 'pesticide': 'Imidacloprid', 'image': 'assets/pesticide_images/aphid_pesticide.jpg'},
-    1: {'pest': 'armyworm', 'pesticide': 'Lambda-cyhalothrin', 'image': 'assets/pesticide_images/armyworm_pesticide.jpg'},
-    2: {'pest': 'beetle', 'pesticide': 'Carbaryl', 'image': 'assets/pesticide_images/beetle_pesticide.jpeg'},
-    3: {'pest': 'bollworm', 'pesticide': 'Chlorpyrifos', 'image': 'assets/pesticide_images/bollworm_pesticide.jpeg'},
-    4: {'pest': 'grasshopper', 'pesticide': 'Malathion', 'image': 'assets/pesticide_images/grasshopper_pesticide.jpeg'},
-    5: {'pest': 'mites', 'pesticide': 'Abamectin', 'image': 'assets/pesticide_images/mites_pesticide.jpg'},
-    6: {'pest': 'mosquito', 'pesticide': 'Temephos', 'image': 'assets/pesticide_images/mosquito_pesticide.jpeg'},
-    7: {'pest': 'sawfly', 'pesticide': 'Spinosad', 'image': 'assets/pesticide_images/sawfly_pesticide.jpeg'},
-    8: {'pest': 'stem_borer', 'pesticide': 'Quinalphos', 'image': 'assets/pesticide_images/stem_borer_pesticide.jpg'}
+    0: {'pest': 'aphid', 'pesticide': 'Imidacloprid', 'image': 'https://github.com/Crop-Pest-Detection/assets/pesticide_images/aphid_pesticide.jpg'}, # Replace with actual URL
+    1: {'pest': 'armyworm', 'pesticide': 'Lambda-cyhalothrin', 'image': 'https://github.com/Crop-Pest-Detection/assets/pesticide_images/armyworm_pesticide.jpg'}, # Replace with actual URL
+    2: {'pest': 'beetle', 'pesticide': 'Carbaryl', 'image': 'https://github.com/Crop-Pest-Detection/assets/pesticide_images/beetle_pesticide.jpeg'},   # Replace with actual URL
+    3: {'pest': 'bollworm', 'pesticide': 'Chlorpyrifos', 'image': 'https://github.com/Crop-Pest-Detection/assets/pesticide_images/bollworm_pesticide.jpeg'}, # Replace with actual URL
+    4: {'pest': 'grasshopper', 'pesticide': 'Malathion', 'image': 'https://github.com/Crop-Pest-Detection/assets/pesticide_images/grasshopper_pesticide.jpeg'}, # Replace with actual URL
+    5: {'pest': 'mites', 'pesticide': 'Abamectin', 'image': 'https://github.com/Crop-Pest-Detection/assets/pesticide_images/mites_pesticide.jpg'},       # Replace with actual URL
+    6: {'pest': 'mosquito', 'pesticide': 'Temephos', 'image': 'https://github.com/Crop-Pest-Detection/assets/pesticide_images/mosquito_pesticide.jpeg'}, # Replace with actual URL
+    7: {'pest': 'sawfly', 'pesticide': 'Spinosad', 'image': 'https://github.com/Crop-Pest-Detection/assets/pesticide_images/sawfly_pesticide.jpeg'},     # Replace with actual URL
+    8: {'pest': 'stem_borer', 'pesticide': 'Quinalphos', 'image': 'https://github.com/Crop-Pest-Detection/assets/pesticide_images/stem_borer_pesticide.jpg'}   # Replace with actual URL
 }
 
 # ========== Session State ==========
@@ -115,8 +120,13 @@ def pest_detection_page():
         if pest_info:
             st.success(f"🪲 **Detected Pest:** {pest_info['pest']}")
             st.markdown(f"💊 **Recommended Pesticide:** {pest_info['pesticide']}")
-            # Show the pesticide image (from a local path in 'assets/predict')
-            st.image(pest_info['image'], caption=f"{pest_info['pest']} Pesticide", use_column_width=True)
+            # Display Pesticide Image
+            try:
+                # Open the image from the URL
+                pesticide_image = Image.open(urllib.request.urlopen(pest_info['image']))
+                st.image(pesticide_image, caption=f"{pest_info['pest']} Pesticide", use_column_width=True)
+            except Exception as e:
+                st.error(f"Error loading pesticide image: {e}.  Please check the image URL.")
         else:
             st.warning("❌ Pest not recognized.")
 
