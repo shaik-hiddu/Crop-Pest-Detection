@@ -8,11 +8,11 @@ import os
 from huggingface_hub import hf_hub_download
 import urllib.request
 
-# ========== Constants ==========
+# ========== Constants ========== 
 USER_FILE = "users.json"
 IMG_SIZE = (380, 380)
 
-# ========== User Authentication ==========
+# ========== User Authentication ========== 
 def load_users():
     if not os.path.exists(USER_FILE):
         with open(USER_FILE, "w") as f:
@@ -33,7 +33,7 @@ def authenticate(username, password):
     users = load_users()
     return users.get(username) == password
 
-# ========== Load Model from Hugging Face ==========
+# ========== Load Model from Hugging Face ========== 
 @st.cache_resource
 def load_pest_model():
     model_path = hf_hub_download(repo_id="hiddu2004/hello", filename="final_model2.h5")
@@ -41,7 +41,7 @@ def load_pest_model():
 
 model = load_pest_model()
 
-# ========== Class Labels with Image URLs ==========
+# ========== Class Labels with Image URLs ========== 
 class_labels = {
     0: {
         'pest': 'aphid',
@@ -91,13 +91,13 @@ class_labels = {
 }
 
 
-# ========== Session State ==========
+# ========== Session State ========== 
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 if "username" not in st.session_state:
     st.session_state.username = ""
 
-# ========== Login/Register Interface ==========
+# ========== Login/Register Interface ========== 
 def login_page():
     st.title("🔐 Login / Register")
     tab1, tab2 = st.tabs(["🔑 Login", "📝 Register"])
@@ -123,7 +123,7 @@ def login_page():
             else:
                 st.warning("Username already exists.")
 
-# ========== Pest Detection Interface ==========
+# ========== Pest Detection Interface ========== 
 def pest_detection_page():
     st.title("🌿 Crop Pest Detection")
     st.write(f"👤 Logged in as **{st.session_state.username}**")
@@ -146,6 +146,7 @@ def pest_detection_page():
 
         prediction = model.predict(img)
         class_idx = np.argmax(prediction, axis=1)[0]
+        st.write(f"Prediction: {prediction}, Class Index: {class_idx}")  # Debugging output
         pest_info = class_labels.get(class_idx)
 
         if pest_info:
@@ -159,7 +160,7 @@ def pest_detection_page():
         else:
             st.warning("❌ Pest not recognized.")
 
-# ========== Run App ==========
+# ========== Run App ========== 
 if st.session_state.logged_in:
     pest_detection_page()
 else:
