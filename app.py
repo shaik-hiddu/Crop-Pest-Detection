@@ -48,15 +48,15 @@ model = load_pest_model()
 # because the original code assumes the 'assets/pesticide_images' directory
 # exists locally, which might not be the case when running in a cloud environment.
 class_labels = {
-    0: {'pest': 'aphid', 'pesticide': 'Imidacloprid', 'image': 'https://github.com/Crop-Pest-Detection/assets/pesticide_images/aphid_pesticide.jpg'}, # Replace with actual URL
-    1: {'pest': 'armyworm', 'pesticide': 'Lambda-cyhalothrin', 'image': 'https://github.com/Crop-Pest-Detection/assets/pesticide_images/armyworm_pesticide.jpg'}, # Replace with actual URL
-    2: {'pest': 'beetle', 'pesticide': 'Carbaryl', 'image': 'https://github.com/Crop-Pest-Detection/assets/pesticide_images/beetle_pesticide.jpeg'},   # Replace with actual URL
-    3: {'pest': 'bollworm', 'pesticide': 'Chlorpyrifos', 'image': 'https://github.com/Crop-Pest-Detection/assets/pesticide_images/bollworm_pesticide.jpeg'}, # Replace with actual URL
-    4: {'pest': 'grasshopper', 'pesticide': 'Malathion', 'image': 'https://github.com/Crop-Pest-Detection/assets/pesticide_images/grasshopper_pesticide.jpeg'}, # Replace with actual URL
-    5: {'pest': 'mites', 'pesticide': 'Abamectin', 'image': 'https://github.com/Crop-Pest-Detection/assets/pesticide_images/mites_pesticide.jpg'},       # Replace with actual URL
-    6: {'pest': 'mosquito', 'pesticide': 'Temephos', 'image': 'https://github.com/Crop-Pest-Detection/assets/pesticide_images/mosquito_pesticide.jpeg'}, # Replace with actual URL
-    7: {'pest': 'sawfly', 'pesticide': 'Spinosad', 'image': 'https://github.com/Crop-Pest-Detection/assets/pesticide_images/sawfly_pesticide.jpeg'},     # Replace with actual URL
-    8: {'pest': 'stem_borer', 'pesticide': 'Quinalphos', 'image': 'https://github.com/Crop-Pest-Detection/assets/pesticide_images/stem_borer_pesticide.jpg'}   # Replace with actual URL
+    0: {'pest': 'aphid', 'pesticide': 'Imidacloprid', 'image': 'https://github.com/shaik-hiddu/Crop-Pest-Detection/assets/pesticide_images/aphid_pesticide.jpg'}, # Replace with actual URL
+    1: {'pest': 'armyworm', 'pesticide': 'Lambda-cyhalothrin', 'image': 'https://github.com/shaik-hiddu/Crop-Pest-Detection/assets/pesticide_images/armyworm_pesticide.jpg'}, # Replace with actual URL
+    2: {'pest': 'beetle', 'pesticide': 'Carbaryl', 'image': 'https://github.com/shaik-hiddu/Crop-Pest-Detection/assets/pesticide_images/beetle_pesticide.jpeg'},   # Replace with actual URL
+    3: {'pest': 'bollworm', 'pesticide': 'Chlorpyrifos', 'image': 'https://github.com/shaik-hiddu/Crop-Pest-Detection/assets/pesticide_images/bollworm_pesticide.jpeg'}, # Replace with actual URL
+    4: {'pest': 'grasshopper', 'pesticide': 'Malathion', 'image': 'https://github.com/shaik-hiddu/Crop-Pest-Detection/assets/pesticide_images/grasshopper_pesticide.jpeg'}, # Replace with actual URL
+    5: {'pest': 'mites', 'pesticide': 'Abamectin', 'image': 'https://github.com/shaik-hiddu/Crop-Pest-Detection/assets/pesticide_images/mites_pesticide.jpg'},       # Replace with actual URL
+    6: {'pest': 'mosquito', 'pesticide': 'Temephos', 'image': 'https://github.com/shaik-hiddu/Crop-Pest-Detection/assets/pesticide_images/mosquito_pesticide.jpeg'}, # Replace with actual URL
+    7: {'pest': 'sawfly', 'pesticide': 'Spinosad', 'image': 'https://github.com/shaik-hiddu/Crop-Pest-Detection/assets/pesticide_images/sawfly_pesticide.jpeg'},     # Replace with actual URL
+    8: {'pest': 'stem_borer', 'pesticide': 'Quinalphos', 'image': 'https://github.com/shaik-hiddu/Crop-Pest-Detection/assets/pesticide_images/stem_borer_pesticide.jpg'}   # Replace with actual URL
 }
 
 # ========== Session State ==========
