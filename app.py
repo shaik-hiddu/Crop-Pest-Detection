@@ -114,12 +114,27 @@ def pest_detection_page():
         predicted_label = index_to_label.get(class_idx)
         pest_info = class_labels.get(predicted_label)
 
+        # Check if pest_info is available
         if pest_info:
             st.success(f"🪲 **Detected Pest:** {predicted_label.replace('_', ' ').title()}")
             st.markdown(f"💊 **Recommended Pesticide:** {pest_info['pesticide']}")
-            st.image(pest_info['image'], caption=f"{predicted_label.replace('_', ' ').title()} Pesticide", use_column_width=True)
+            
+            # Check if image file exists, if not use a placeholder
+            pest_image = get_image_path(pest_info['image'])
+            st.image(pest_image, caption=f"{predicted_label.replace('_', ' ').title()} Pesticide", use_column_width=True)
         else:
             st.warning("❌ Pest not recognized.")
+
+# ========== Helper Function to Get Image Path ==========
+def get_image_path(image_file):
+    """
+    Checks if the image file exists in the assets directory, if not returns a placeholder image.
+    """
+    if os.path.exists(image_file):
+        return image_file
+    else:
+        # Provide a placeholder image if the image is not found
+        return "assets/pesticide_images/placeholder_image.jpg"
 
 # ========== Main App ==========
 if st.session_state.logged_in:
