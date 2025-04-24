@@ -43,15 +43,15 @@ def load_pest_model():
 model = load_pest_model()
 # ========== Class Labels ==========
 class_labels = {
-    0: {'pest': 'Aphid', 'pesticide': 'Pyrethroids', 'pesticide_img': 'assets/pesticide_images/aphid_pesticide.jpg'},
-    1: {'pest': 'Armyworm', 'pesticide': 'Bacillus thuringiensis', 'pesticide_img': 'assets/pesticide_images/armyworm_pesticide.jpg'},
-    2: {'pest': 'Caterpillar', 'pesticide': 'Insecticidal Soap', 'pesticide_img': 'assets/pesticide_images/caterpillar_pesticide.jpg'},
-    3: {'pest': 'Whitefly', 'pesticide': 'Neem Oil', 'pesticide_img': 'assets/pesticide_images/whitefly_pesticide.jpg'},
-    4: {'pest': 'Thrips', 'pesticide': 'Spinosad', 'pesticide_img': 'assets/pesticide_images/thrips_pesticide.jpg'},
-    5: {'pest': 'Leafhopper', 'pesticide': 'Malathion', 'pesticide_img': 'assets/pesticide_images/leafhopper_pesticide.jpg'},
-    6: {'pest': 'Root Knot Nematode', 'pesticide': 'Fumigants', 'pesticide_img': 'assets/pesticide_images/root_knot_nematode_pesticide.jpg'},
-    7: {'pest': 'Cucumber Beetle', 'pesticide': 'Diazinon', 'pesticide_img': 'assets/pesticide_images/cucumber_beetle_pesticide.jpg'},
-    8: {'pest': 'Aphid (Green)', 'pesticide': 'Chlorpyrifos', 'pesticide_img': 'assets/pesticide_images/green_aphid_pesticide.jpg'},
+    0: {'pest': 'aphids', 'pesticide': 'Imidacloprid', 'image': 'assets/pesticide_images/aphid_pesticide.jpg'},
+    1: {'pest': 'armyworm', 'pesticide': 'Lambda-cyhalothrin', 'image': 'assets/pesticide_images/armyworm_pesticide.jpg'},
+    2: {'pest': 'beetle', 'pesticide': 'Carbaryl', 'image': 'assets/pesticide_images/beetle_pesticide.jpg'},
+    3: {'pest': 'bollworm', 'pesticide': 'Chlorpyrifos', 'image': 'assets/pesticide_images/bollworm_pesticide.jpg'},
+    4: {'pest': 'grasshopper', 'pesticide': 'Malathion', 'image': 'assets/pesticide_images/grasshopper_pesticide.jpg'},
+    5: {'pest': 'mites', 'pesticide': 'Abamectin', 'image': 'assets/pesticide_images/mites_pesticide.jpg'},
+    6: {'pest': 'mosquito', 'pesticide': 'Temephos', 'image': 'assets/pesticide_images/mosquito_pesticide.jpg'},
+    7: {'pest': 'sawfly', 'pesticide': 'Spinosad', 'image': 'assets/pesticide_images/sawfly_pesticide.jpg'},
+    8: {'pest': 'stem_borer', 'pesticide': 'Quinalphos', 'image': 'assets/pesticide_images/stem_borer_pesticide.jpg'}
 }
 # ========== Session State ==========
 if "logged_in" not in st.session_state:
