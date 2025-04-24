@@ -115,7 +115,7 @@ def pest_detection_page():
         if pest_info:
             st.success(f"🪲 **Detected Pest:** {pest_info['pest']}")
             st.markdown(f"💊 **Recommended Pesticide:** {pest_info['pesticide']}")
-            # Show the pesticide image
+            # Show the pesticide image (from a local path in 'assets/predict')
             st.image(pest_info['image'], caption=f"{pest_info['pest']} Pesticide", use_column_width=True)
         else:
             st.warning("❌ Pest not recognized.")
