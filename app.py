@@ -45,12 +45,12 @@ model = load_pest_model()
 class_labels= {
     0: {'pest': 'aphid', 'pesticide': 'Imidacloprid', 'image': 'assets/pesticide_images/aphid_pesticide.jpg'},
     1: {'pest': 'armyworm', 'pesticide': 'Lambda-cyhalothrin', 'image': 'assets/pesticide_images/armyworm_pesticide.jpg'},
-    2: {'pest': 'beetle', 'pesticide': 'Carbaryl', 'image': 'assets/pesticide_images/beetle_pesticide.jpg'},
-    3: {'pest': 'bollworm', 'pesticide': 'Chlorpyrifos', 'image': 'assets/pesticide_images/bollworm_pesticide.jpg'},
-    4: {'pest': 'grasshopper', 'pesticide': 'Malathion', 'image': 'assets/pesticide_images/grasshopper_pesticide.jpg'},
+    2: {'pest': 'beetle', 'pesticide': 'Carbaryl', 'image': 'assets/pesticide_images/beetle_pesticide.jpeg'},
+    3: {'pest': 'bollworm', 'pesticide': 'Chlorpyrifos', 'image': 'assets/pesticide_images/bollworm_pesticide.jpeg'},
+    4: {'pest': 'grasshopper', 'pesticide': 'Malathion', 'image': 'assets/pesticide_images/grasshopper_pesticide.jpeg'},
     5: {'pest': 'mites', 'pesticide': 'Abamectin', 'image': 'assets/pesticide_images/mites_pesticide.jpg'},
-    6: {'pest': 'mosquito', 'pesticide': 'Temephos', 'image': 'assets/pesticide_images/mosquito_pesticide.jpg'},
-    7: {'pest': 'sawfly', 'pesticide': 'Spinosad', 'image': 'assets/pesticide_images/sawfly_pesticide.jpg'},
+    6: {'pest': 'mosquito', 'pesticide': 'Temephos', 'image': 'assets/pesticide_images/mosquito_pesticide.jpeg'},
+    7: {'pest': 'sawfly', 'pesticide': 'Spinosad', 'image': 'assets/pesticide_images/sawfly_pesticide.jpeg'},
     8: {'pest': 'stem_borer', 'pesticide': 'Quinalphos', 'image': 'assets/pesticide_images/stem_borer_pesticide.jpg'},
     }
 # ========== Session State ==========
