@@ -5,18 +5,27 @@ import numpy as np
 from PIL import Image
 import json
 import os
-import streamlit as st
-from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing import image
-import numpy as np
-from PIL import Image
 from huggingface_hub import hf_hub_download
-import json
-import os
+
 # ========== Constants ==========
 USER_FILE = "users.json"
-MODEL_PATH = "final_model.h5"  # Replace with actual path if loading locally
 IMG_SIZE = (380, 380)
+
+# ========== Class Labels ==========
+class_labels = {
+    'aphids': {'id': 0, 'pesticide': 'Imidacloprid', 'image': 'assets/pesticide_images/aphid_pesticide.jpg'},
+    'armyworm': {'id': 1, 'pesticide': 'Lambda-cyhalothrin', 'image': 'assets/pesticide_images/armyworm_pesticide.jpg'},
+    'beetle': {'id': 2, 'pesticide': 'Carbaryl', 'image': 'assets/pesticide_images/beetle_pesticide.jpg'},
+    'bollworm': {'id': 3, 'pesticide': 'Chlorpyrifos', 'image': 'assets/pesticide_images/bollworm_pesticide.jpg'},
+    'grasshopper': {'id': 4, 'pesticide': 'Malathion', 'image': 'assets/pesticide_images/grasshopper_pesticide.jpg'},
+    'mites': {'id': 5, 'pesticide': 'Abamectin', 'image': 'assets/pesticide_images/mites_pesticide.jpg'},
+    'mosquito': {'id': 6, 'pesticide': 'Temephos', 'image': 'assets/pesticide_images/mosquito_pesticide.jpg'},
+    'sawfly': {'id': 7, 'pesticide': 'Spinosad', 'image': 'assets/pesticide_images/sawfly_pesticide.jpg'},
+    'stem_borer': {'id': 8, 'pesticide': 'Quinalphos', 'image': 'assets/pesticide_images/stem_borer_pesticide.jpg'}
+}
+
+# Reverse mapping from ID to label name
+index_to_label = {v['id']: k for k, v in class_labels.items()}
 
 # ========== Authentication ==========
 def load_users():
@@ -46,19 +55,6 @@ def load_pest_model():
     return load_model(model_path)
 
 model = load_pest_model()
-
-# ========== Class Labels ==========
-class_labels = {
-    0: {'pest': 'Aphid', 'pesticide': 'Pyrethroids', 'pesticide_img': 'assets/pesticide_images/aphid_pesticide.jpg'},
-    1: {'pest': 'Armyworm', 'pesticide': 'Bacillus thuringiensis', 'pesticide_img': 'assets/pesticide_images/armyworm_pesticide.jpg'},
-    2: {'pest': 'Caterpillar', 'pesticide': 'Insecticidal Soap', 'pesticide_img': 'assets/pesticide_images/caterpillar_pesticide.jpg'},
-    3: {'pest': 'Whitefly', 'pesticide': 'Neem Oil', 'pesticide_img': 'assets/pesticide_images/whitefly_pesticide.jpg'},
-    4: {'pest': 'Thrips', 'pesticide': 'Spinosad', 'pesticide_img': 'assets/pesticide_images/thrips_pesticide.jpg'},
-    5: {'pest': 'Leafhopper', 'pesticide': 'Malathion', 'pesticide_img': 'assets/pesticide_images/leafhopper_pesticide.jpg'},
-    6: {'pest': 'Root Knot Nematode', 'pesticide': 'Fumigants', 'pesticide_img': 'assets/pesticide_images/root_knot_nematode_pesticide.jpg'},
-    7: {'pest': 'Cucumber Beetle', 'pesticide': 'Diazinon', 'pesticide_img': 'assets/pesticide_images/cucumber_beetle_pesticide.jpg'},
-    8: {'pest': 'Aphid (Green)', 'pesticide': 'Chlorpyrifos', 'pesticide_img': 'assets/pesticide_images/green_aphid_pesticide.jpg'},
-}
 
 # ========== Session State ==========
 if "logged_in" not in st.session_state:
@@ -115,12 +111,13 @@ def pest_detection_page():
         # Prediction
         prediction = model.predict(img)
         class_idx = np.argmax(prediction, axis=1)[0]
-        pest_info = class_labels.get(class_idx)
+        predicted_label = index_to_label.get(class_idx)
+        pest_info = class_labels.get(predicted_label)
 
         if pest_info:
-            st.success(f"🪲 **Detected Pest:** {pest_info['pest']}")
+            st.success(f"🪲 **Detected Pest:** {predicted_label.replace('_', ' ').title()}")
             st.markdown(f"💊 **Recommended Pesticide:** {pest_info['pesticide']}")
-            st.image(pest_info['pesticide_img'], caption=f"{pest_info['pest']} Pesticide", use_column_width=True)
+            st.image(pest_info['image'], caption=f"{predicted_label.replace('_', ' ').title()} Pesticide", use_column_width=True)
         else:
             st.warning("❌ Pest not recognized.")
 
@@ -129,4 +126,3 @@ if st.session_state.logged_in:
     pest_detection_page()
 else:
     login_page()
-
