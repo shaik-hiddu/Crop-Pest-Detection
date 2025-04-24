@@ -43,16 +43,53 @@ model = load_pest_model()
 
 # ========== Class Labels with Image URLs ==========
 class_labels = {
-    0: {'pest': 'aphid', 'pesticide': 'Imidacloprid', 'image': 'https://github.com/shaik-hiddu/Crop-Pest-Detection/assets/pesticide_images/aphid_pesticide.jpg'},
-    1: {'pest': 'armyworm', 'pesticide': 'Lambda-cyhalothrin', 'image': 'https://github.com/shaik-hiddu/Crop-Pest-Detection/assets/pesticide_images/armyworm_pesticide.jpg'},
-    2: {'pest': 'beetle', 'pesticide': 'Carbaryl', 'image': 'https://github.com/shaik-hiddu/Crop-Pest-Detection/assets/pesticide_images/beetle_pesticide.jpeg'},
-    3: {'pest': 'bollworm', 'pesticide': 'Chlorpyrifos', 'image': 'https://github.com/shaik-hiddu/Crop-Pest-Detection/assets/pesticide_images/bollworm_pesticide.jpeg'},
-    4: {'pest': 'grasshopper', 'pesticide': 'Malathion', 'image': 'https://github.com/shaik-hiddu/Crop-Pest-Detection/assets/pesticide_images/grasshopper_pesticide.jpeg'},
-    5: {'pest': 'mites', 'pesticide': 'Abamectin', 'image': 'https://github.com/shaik-hiddu/Crop-Pest-Detection/assets/pesticide_images/mites_pesticide.jpg'},
-    6: {'pest': 'mosquito', 'pesticide': 'Temephos', 'image': 'https://github.com/shaik-hiddu/Crop-Pest-Detection/assets/pesticide_images/mosquito_pesticide.jpeg'},
-    7: {'pest': 'sawfly', 'pesticide': 'Spinosad', 'image': 'https://github.com/shaik-hiddu/Crop-Pest-Detection/assets/pesticide_images/sawfly_pesticide.jpeg'},
-    8: {'pest': 'stem_borer', 'pesticide': 'Quinalphos', 'image': 'https://github.com/shaik-hiddu/Crop-Pest-Detection/assets/pesticide_images/stem_borer_pesticide.jpg'}
+    0: {
+        'pest': 'aphid',
+        'pesticide': 'Imidacloprid',
+        'image': 'https://huggingface.co/hiddu2004/hello/resolve/main/pesticide_images/aphid_pesticide.jpg'
+    },
+    1: {
+        'pest': 'armyworm',
+        'pesticide': 'Lambda-cyhalothrin',
+        'image': 'https://huggingface.co/hiddu2004/hello/resolve/main/pesticide_images/armyworm_pesticide.jpg'
+    },
+    2: {
+        'pest': 'beetle',
+        'pesticide': 'Carbaryl',
+        'image': 'https://huggingface.co/hiddu2004/hello/resolve/main/pesticide_images/beetle_pesticide.jpeg'
+    },
+    3: {
+        'pest': 'bollworm',
+        'pesticide': 'Chlorpyrifos',
+        'image': 'https://huggingface.co/hiddu2004/hello/resolve/main/pesticide_images/bollworm_pesticide.jpeg'
+    },
+    4: {
+        'pest': 'grasshopper',
+        'pesticide': 'Malathion',
+        'image': 'https://huggingface.co/hiddu2004/hello/resolve/main/pesticide_images/grasshopper_pesticide.jpeg'
+    },
+    5: {
+        'pest': 'mites',
+        'pesticide': 'Abamectin',
+        'image': 'https://huggingface.co/hiddu2004/hello/resolve/main/pesticide_images/mites_pesticide.jpg'
+    },
+    6: {
+        'pest': 'mosquito',
+        'pesticide': 'Temephos',
+        'image': 'https://huggingface.co/hiddu2004/hello/resolve/main/pesticide_images/mosquito_pesticide.jpeg'
+    },
+    7: {
+        'pest': 'sawfly',
+        'pesticide': 'Spinosad',
+        'image': 'https://huggingface.co/hiddu2004/hello/resolve/main/pesticide_images/sawfly_pesticide.jpeg'
+    },
+    8: {
+        'pest': 'stem_borer',
+        'pesticide': 'Quinalphos',
+        'image': 'https://huggingface.co/hiddu2004/hello/resolve/main/pesticide_images/stem_borer_pesticide.jpg'
+    }
 }
+
 
 # ========== Session State ==========
 if "logged_in" not in st.session_state:
