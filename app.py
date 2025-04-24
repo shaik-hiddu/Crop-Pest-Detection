@@ -51,7 +51,7 @@ def authenticate(username, password):
 # ========== Load Model ==========
 @st.cache_resource
 def load_pest_model():
-    model_path = hf_hub_download(repo_id="hiddu2004/hello", filename="final_model(2).h5")
+    model_path = hf_hub_download(repo_id="hiddu2004/hello", filename="final_model2.h5")
     return load_model(model_path)
 
 model = load_pest_model()
