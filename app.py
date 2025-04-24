@@ -42,8 +42,7 @@ def load_pest_model():
     return load_model(model_path)
 model = load_pest_model()
 # ========== Class Labels ==========
-class_labels = {
-    0: {'pest': 'aphids', 'pesticide': 'Imidacloprid', 'image': 'assets/pesticide_images/aphid_pesticide.jpg'},
+aphid_pesticide.jpg'},
     1: {'pest': 'armyworm', 'pesticide': 'Lambda-cyhalothrin', 'image': 'assets/pesticide_images/armyworm_pesticide.jpg'},
     2: {'pest': 'beetle', 'pesticide': 'Carbaryl', 'image': 'assets/pesticide_images/beetle_pesticide.jpg'},
     3: {'pest': 'bollworm', 'pesticide': 'Chlorpyrifos', 'image': 'assets/pesticide_images/bollworm_pesticide.jpg'},
@@ -51,8 +50,8 @@ class_labels = {
     5: {'pest': 'mites', 'pesticide': 'Abamectin', 'image': 'assets/pesticide_images/mites_pesticide.jpg'},
     6: {'pest': 'mosquito', 'pesticide': 'Temephos', 'image': 'assets/pesticide_images/mosquito_pesticide.jpg'},
     7: {'pest': 'sawfly', 'pesticide': 'Spinosad', 'image': 'assets/pesticide_images/sawfly_pesticide.jpg'},
-}
-# ========== Session State ==========
+    8: {'pest': 'stem_borer', 'pesticide': 'Quinalphos', 'image': 'assets/pesticide_images/stem_borer_pesticide.jpg'}
+}# ========== Session State ==========
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 if "username" not in st.session_state:
