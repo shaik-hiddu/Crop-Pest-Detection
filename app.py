@@ -51,7 +51,6 @@ class_labels = {
     5: {'pest': 'mites', 'pesticide': 'Abamectin', 'image': 'assets/pesticide_images/mites_pesticide.jpg'},
     6: {'pest': 'mosquito', 'pesticide': 'Temephos', 'image': 'assets/pesticide_images/mosquito_pesticide.jpg'},
     7: {'pest': 'sawfly', 'pesticide': 'Spinosad', 'image': 'assets/pesticide_images/sawfly_pesticide.jpg'},
-    8: {'pest': 'stem_borer', 'pesticide': 'Quinalphos', 'image': 'assets/pesticide_images/stem_borer_pesticide.jpg'}
 }
 # ========== Session State ==========
 if "logged_in" not in st.session_state:
