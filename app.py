@@ -103,7 +103,7 @@ def pest_detection_page():
     uploaded_file = st.file_uploader("📷 Choose an image...", type=["jpg", "png", "jpeg"])
     if uploaded_file is not None:
         image_data = Image.open(uploaded_file).convert('RGB')
-        st.image(image_data, caption='Uploaded Image', use_column_width=True)
+        st.image(image_data, caption='Uploaded Image', use_column_width=True,use_container_width=True)
 
         # Preprocess the image
         img = image_data.resize(img_size)
@@ -119,7 +119,7 @@ def pest_detection_page():
         if pest_info:
             st.success(f"🪲 **Detected Pest:** {pest_info['pest']}")
             st.markdown(f"💊 **Recommended Pesticide:** {pest_info['pesticide']}")
-            st.image(pest_info['pesticide_img'], caption=f"{pest_info['pest']} Pesticide", use_column_width=True)
+            st.image(pest_info['pesticide_img'], caption=f"{pest_info['pest']} Pesticide", use_column_width=True,use_container_width=True)
         else:
             st.error("❌ Pest not recognized.")
 
